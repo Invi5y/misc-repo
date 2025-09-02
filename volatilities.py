@@ -18,3 +18,5 @@ fig = plt.figure(figsize=(10,6))
 ax = fig.add_subplot(111, projection='3d')
 surf = ax.plot_surface(strike, ttm, iv)
 plt.show()
+
+print('hello')
