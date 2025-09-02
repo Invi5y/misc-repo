@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Inventory Management{% endblock %}
+{% block content %}
+  <h2>Inventory</h2>
+  <p><a class="btn btn-success" href="{{ url_for('add_inventory') }}">Add Item</a>
+     <a class="btn btn-secondary" href="{{ url_for('download_inventory') }}">Export CSV</a></p>
+  <table class="table">
+    <thead><tr><th>Name</th><th>Desc</th><th>Price</th><th>Qty</th><th>Action</th></tr></thead>
+    <tbody>
+      {% for id,name,desc,price,qty in items %}
+        <tr>
+          <td>{{ name }}</td>
+          <td>{{ desc }}</td>
+          <td>${{ price }}</td>
+          <td>{{ qty }}</td>
+          <td>
+            <a class="btn btn-sm btn-danger"
+               href="{{ url_for('delete_inventory', item_id=id) }}"
+               onclick="return confirm('Delete this item?');">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

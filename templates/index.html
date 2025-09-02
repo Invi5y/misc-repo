@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+  <div class="text-center mt-5">
+    <h1>Welcome to the Store</h1>
+    <p class="mt-3">
+      <a class="btn btn-primary me-2" href="{{ url_for('login') }}">Customer Login</a>
+      <a class="btn btn-secondary me-2" href="{{ url_for('register') }}">Register</a>
+      <a class="btn btn-dark" href="{{ url_for('manager_login') }}">Manager Login</a>
+    </p>
+  </div>
+{% endblock %}

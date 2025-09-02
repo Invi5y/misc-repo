@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Purchase History{% endblock %}
+{% block content %}
+  <h2>Your Purchase History</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Timestamp</th>
+        <th>Item</th>
+        <th>Description</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+        <th>Order Total</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in purchases %}
+      {% for name, desc, qty, price in p.entries %}
+        <tr>
+          {% if loop.first %}
+            <td rowspan="{{ p.entries|length }}">{{ p.id }}</td>
+            <td rowspan="{{ p.entries|length }}">{{ p.timestamp }}</td>
+          {% endif %}
+          <td>{{ name }}</td>
+          <td>{{ desc }}</td>
+          <td>{{ qty }}</td>
+          <td>${{ price|round(2) }}</td>
+          <td>${{ (qty*price)|round(2) }}</td>
+          {% if loop.first %}
+            <td rowspan="{{ p.entries|length }}">${{ p.total|round(2) }}</td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    {% endfor %}
+    </tbody>
+  </table>
+  <p>
+    <a class="btn btn-secondary" href="{{ url_for('history_csv') }}">
+      Download History CSV
+    </a>
+  </p>
+{% endblock %}

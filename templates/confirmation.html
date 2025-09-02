@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Confirmation{% endblock %}
+{% block content %}
+  <div class="text-center">
+    <h2>Thank you for your purchase!</h2>
+    <p>Your order #{{ pid }} has been placed.</p>
+    <p><a class="btn btn-primary" href="{{ url_for('history') }}">View Purchase History</a></p>
+  </div>
+{% endblock %}

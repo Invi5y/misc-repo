@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Shop{% endblock %}
+{% block content %}
+  <h2>Shop</h2>
+  <div class="row">
+    {% for id,name,desc,price,qty in items %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ name }}</h5>
+            <p class="card-text">{{ desc }}</p>
+            <p><strong>${{ '%.2f'|format(price) }}</strong> &nbsp; Stock: {{ qty }}</p>
+            <form method="post" action="{{ url_for('cart') }}" class="d-flex">
+              <input type="hidden" name="item_id" value="{{ id }}">
+              <input type="number" name="quantity" value="1" min="1" max="{{ qty }}" class="form-control me-2">
+              <button class="btn btn-success" {% if qty==0 %}disabled{% endif %}>
+                Add to Cart
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <p>No items available.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

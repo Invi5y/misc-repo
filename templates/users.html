@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Employee Management{% endblock %}
+{% block content %}
+  <h2>Employees</h2>
+  <p><a class="btn btn-success" href="{{ url_for('add_user') }}">Add Employee</a></p>
+  <table class="table">
+    <thead><tr><th>Username</th><th>Role</th><th>Action</th></tr></thead>
+    <tbody>
+      {% for id,username,role in users %}
+        <tr>
+          <td>{{ username }}</td>
+          <td>{{ role }}</td>
+          <td>
+            <a class="btn btn-sm btn-danger" href="{{ url_for('delete_user', user_id=id) }}"
+               onclick="return confirm('Delete this user?');">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
